@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <link rel="stylesheet" href="css/layout-refactor.css">
 </head>
 <body>
   <div class="app-bg"><div class="blob b1"></div><div class="blob b2"></div></div>
@@ -17,11 +18,18 @@
     <div class="header-title">
         <h2>Analytics</h2>
     </div>
-    <div class="user-pill" onclick="window.location.href='profile.html'">
-      <div class="avatar-xs"><i class="fa-solid fa-user"></i></div>
-      <span style="font-size:0.8rem; font-weight:600; color: var(--text-primary);">You</span>
+    
+    <div id="top-nav-container" class="top-nav"></div>
+
+    <div style="display:flex; align-items:center;">
+        <div id="theme-toggle-container"></div>
+        <div class="user-pill" onclick="window.location.href='profile.html'">
+            <div class="avatar-xs"><i class="fa-solid fa-user"></i></div>
+            <span style="font-size:0.8rem; font-weight:600; color: var(--text-primary);">You</span>
+        </div>
     </div>
   </header>
+  <div id="mobile-nav-strip" class="mobile-nav-strip hidden"></div>
 
   <div style="padding: 20px 20px 100px; max-width: 800px; margin: 0 auto;">
     
@@ -112,6 +120,6 @@
 
   <script src="js/router.js"></script>
   <script src="js/ui.js"></script>
-  <script src="js/analytics.js"></script>
+  <script type="module" src="js/analytics.js"></script>
 </body>
 </html>

@@ -1,8 +1,9 @@
 /**
  * feed.js
- * Handles post generation, animations, and infinite scroll.
- * NOW WITH EXPANDED DATASET.
+ * Handles post generation, animations, infinite scroll, and Side Panel Stats.
  */
+
+import { getUserProfile, updateUserProfile } from './services/firestore.js';
 
 window.addEventListener("load", () => ScrollTrigger.refresh());
 
@@ -10,8 +11,84 @@ const feedContainer = document.getElementById('feed-container');
 const loader = document.getElementById('feed-loader');
 let postCount = 0;
 let loading = false;
+let currentUser = null;
 
-// --- 1. EXPANDED MOCK DATA ---
+// --- 1. INITIALIZATION & SIDE PANEL ---
+
+document.addEventListener("DOMContentLoaded", async () => {
+    // Load User Data for Side Panel
+    currentUser = await getUserProfile();
+    if (currentUser) {
+        initSidePanel(currentUser);
+    }
+
+    // Load Feed
+    loadMorePosts();
+    if(loader) observer.observe(loader);
+});
+
+function initSidePanel(user) {
+    // 1. EI Circle
+    const eiVal = user.ei || 0;
+    const eiRing = document.getElementById('mini-ei-ring');
+    const eiText = document.getElementById('mini-ei-val');
+    
+    if(eiRing && eiText) {
+        eiText.innerText = eiVal;
+        // 283 is circumference (2 * pi * 45)
+        const offset = 283 - ((eiVal / 1000) * 283);
+        gsap.to(eiRing, { strokeDashoffset: offset, duration: 1.5, ease: "power3.out" });
+    }
+
+    // 2. Consistency & Streak
+    // Mock calculations if fields missing
+    const consistency = Math.round((user.attendance || 85) * 0.8 + (user.ei || 850) / 100); 
+    const streak = user.streak || 12;
+
+    const conEl = document.getElementById('qs-consistency');
+    const strEl = document.getElementById('qs-streak');
+
+    if(conEl) animateCounter(conEl, consistency, "%");
+    if(strEl) animateCounter(strEl, streak, "");
+}
+
+function animateCounter(el, target, suffix) {
+    let obj = { val: 0 };
+    gsap.to(obj, {
+        val: target,
+        duration: 1.5,
+        ease: "power3.out",
+        onUpdate: () => el.innerText = Math.round(obj.val) + suffix
+    });
+}
+
+// --- 2. QUICK ACTIONS ---
+
+window.logAttendance = async function() {
+    if(!currentUser) return;
+    
+    // Optimistic UI Update
+    const btn = document.querySelector('.panel-btn i.fa-calendar-check');
+    gsap.to(btn, { rotation: 360, duration: 0.5 });
+    
+    alert(`Attendance Logged for ${new Date().toLocaleDateString()}! \nConsistency +1%`);
+    
+    // In a real app, we'd update Firestore here
+    // await updateUserProfile({ attendance: (currentUser.attendance || 0) + 1 });
+};
+
+window.uploadCert = function() {
+    // Redirect to Analytics where upload lives, or open modal
+    window.location.href = 'analytics.html';
+};
+
+window.logProject = function() {
+    // Redirect to Profile to add project
+    window.location.href = 'profile.html';
+};
+
+
+// --- 3. FEED DATA & LOGIC ---
 const mockUsers = [
     { name: "Sarah Jenkins", role: "Design • NIFT", img: "https://randomuser.me/api/portraits/women/44.jpg" },
     { name: "Arjun Patel", role: "CS • IIT Bombay", img: "https://randomuser.me/api/portraits/men/32.jpg" },
@@ -54,25 +131,12 @@ const postTemplates = [
         streak: 30 
     },
     { 
-        type: 'streak', 
-        content: "50 Days of Design! I've created one UI element every single day.", 
-        streak: 50 
-    },
-    { 
         type: 'achievement', 
         content: "We won 1st place at the Hackathon! 🏆 48 hours of no sleep but worth it. Teamwork makes the dream work.", 
         img: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80", 
         tags: ["#Hackathon", "#Winner", "#Coding"] 
-    },
-    { 
-        type: 'achievement', 
-        content: "Selected as the Campus Ambassador for Google DSC! So excited to build this community.", 
-        img: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80", 
-        tags: ["#Leadership", "#Community", "#DSC"] 
     }
 ];
-
-// --- 2. LOGIC ---
 
 function getTimeAgo(minusMinutes) {
     if (minusMinutes < 60) return `${minusMinutes}m ago`;
@@ -135,7 +199,7 @@ function createPostHTML(post) {
     `;
 }
 
-// --- 3. ANIMATION ---
+// --- 4. ANIMATION & SCROLL ---
 
 function animateNewPosts(elements) {
     gsap.to(elements, {
@@ -172,8 +236,6 @@ window.toggleLike = function(btn) {
     }
 };
 
-// --- 4. INFINITE SCROLL ---
-
 async function loadMorePosts() {
     if (loading) return;
     loading = true;
@@ -196,8 +258,3 @@ async function loadMorePosts() {
 const observer = new IntersectionObserver(entries => {
     if (entries[0].isIntersecting) loadMorePosts();
 }, { rootMargin: '100px' });
-
-document.addEventListener("DOMContentLoaded", () => {
-    loadMorePosts();
-    if(loader) observer.observe(loader);
-});
