@@ -663,6 +663,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   line-height: 1;
   background: linear-gradient(to bottom, var(--text-primary), var(--text-secondary));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: pulseText 2s infinite ease-in-out;
 }
@@ -766,17 +767,94 @@ footer {
 }
 
 /* --- RESPONSIVE --- */
+/* --- RESPONSIVE --- */
 @media (max-width: 768px) {
   .floating-nav { display: none; }
-  .shimmer-text { font-size: 4rem; }
-  .grid-2-col, .why-grid { grid-template-columns: 1fr; }
+  
+  /* Hero Adjustments */
   .hero-section { padding: 20px; }
-  .container-scroll { height: 60rem; padding: 20px; }
-  .card { height: 30rem; margin-top: -40px; }
-  .big-title { font-size: 3rem; }
-  .horizontal-wrapper { width: 800%; padding: 0 20px; }
-  .scroll-card { width: 300px; height: 450px; }
+  .shimmer-text { font-size: 3.5rem; } /* Smaller title */
+  
+  .glass-panel {
+    padding: 2rem; /* Reduced padding */
+    width: 100%;
+  }
+  
+  .glass-content h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-btns {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .glass-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* 3D Scroll Section */
+  .container-scroll { height: auto; padding: 40px 20px; }
+  .card { height: auto; margin-top: 0; transform: none !important; }
+  .big-title { font-size: 3rem; margin-bottom: 20px; }
+  
+  .recruiter-ui { padding: 20px; }
+  .filter-row { padding-bottom: 10px; }
+  
+  /* Horizontal Section -> Vertical on Mobile */
+  .horizontal-section {
+    height: auto;
+    overflow: visible;
+    background: var(--text-primary); /* Solid bg fallback */
+  }
+  
+  .horizontal-wrapper {
+    width: 100%;
+    flex-direction: column;
+    padding: 60px 20px;
+    gap: 40px;
+    height: auto;
+  }
+  
+  .horizontal-header {
+    min-width: 0;
+    padding-right: 0;
+    text-align: center;
+  }
+  
   .horizontal-header h2 { font-size: 3rem; }
-  .calc-grid { gap: 30px; }
-  .score-circle { width: 250px; height: 250px; }
+  
+  .cards-track {
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+  }
+  
+  .scroll-card {
+    width: 100%;
+    height: auto;
+    min-height: 400px;
+  }
+  
+  /* Calculator & Why Section */
+  .calculator-section {
+    margin: 60px 20px;
+    padding: 40px 20px;
+    border-radius: 40px;
+  }
+  
+  .calc-grid { 
+    grid-template-columns: 1fr; 
+    gap: 40px; 
+  }
+  
+  .score-circle { width: 250px; height: 250px; margin: 0 auto; }
+  
+  .why-section { padding: 80px 20px; }
+  .why-content h2 { font-size: 2.5rem; margin-bottom: 40px; }
+  .why-grid { grid-template-columns: 1fr; }
+  
+  .grid-2-col { grid-template-columns: 1fr; }
+  .pain-card { padding: 2rem; }
 }

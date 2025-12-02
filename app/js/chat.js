@@ -141,6 +141,15 @@ async function openChat(match) {
     });
 }
 
+window.closeChatMobile = function() {
+    activeChatId = null;
+    if (unsubscribeFromChat) unsubscribeFromChat();
+    
+    document.getElementById('active-chat-view').classList.add('hidden');
+    document.getElementById('no-chat').classList.remove('hidden');
+    document.getElementById('chat-layout').classList.remove('active-chat');
+};
+
 function renderMessages(history) {
     msgContainer.innerHTML = '';
     

@@ -179,45 +179,59 @@
 }
 
 /* --- RESPONSIVE ADJUSTMENTS --- */
+/* --- RESPONSIVE ADJUSTMENTS --- */
 @media (max-width: 900px) {
   .main-layout {
     flex-direction: column;
     gap: 20px;
+    padding: 15px;
   }
   
-  .side-panel {
+  /* Side Panel becomes a horizontal scrollable strip on mobile */
+  .side-panel, .quick-panel {
     width: 100%;
     position: relative;
     top: 0;
     flex-direction: row;
     overflow-x: auto;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
     max-height: none;
+    gap: 15px;
+    scrollbar-width: none; /* Hide scrollbar for cleaner look */
+  }
+
+  .side-panel::-webkit-scrollbar {
+    display: none;
   }
   
   .panel-card {
-    min-width: 200px;
+    min-width: 220px;
     padding: 15px;
+    flex-shrink: 0;
   }
   
   .top-nav {
-    display: none; /* Hide on mobile, maybe use a hamburger or keep bottom nav? 
-                     Wait, prompt says REMOVE bottom nav. 
-                     So we need a mobile solution for Top Nav. */
+    display: none; 
   }
   
   /* Mobile Header Nav - Scrollable Strip */
   .mobile-nav-strip {
     display: flex;
     overflow-x: auto;
-    gap: 10px;
-    padding: 10px 20px;
-    background: rgba(255,255,255,0.8);
-    backdrop-filter: blur(10px);
+    gap: 15px;
+    padding: 12px 20px;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     border-bottom: 1px solid rgba(0,0,0,0.05);
     position: sticky;
     top: 70px; /* Below header */
     z-index: 90;
+    scrollbar-width: none;
+  }
+
+  .mobile-nav-strip::-webkit-scrollbar {
+    display: none;
   }
   
   .page-header {
@@ -227,11 +241,20 @@
   .header-title h2 {
     font-size: 1.5rem;
   }
+
+  .user-pill {
+    padding: 4px 12px 4px 4px;
+  }
+  
+  .user-pill span {
+    display: none; /* Hide name on mobile to save space */
+  }
 }
 
 /* Desktop Feed Adjustment */
 .feed-stream {
   flex: 1;
-  max-width: 800px; /* Expanded from 600px */
-  margin: 0; /* Reset auto margin */
+  max-width: 800px; 
+  margin: 0; 
+  width: 100%;
 }
