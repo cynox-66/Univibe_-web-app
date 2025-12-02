@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboard - UniVibe</title>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+  <div class="app-bg"><div class="blob b1"></div><div class="blob b2"></div></div>
+  
+  <!-- Header -->
+  <header class="page-header">
+    <div class="header-title">
+        <h2>Leaderboard</h2>
+        <span>Top Campus Vibers</span>
+    </div>
+    <div class="user-pill" onclick="window.location.href='profile.html'">
+      <div class="avatar-xs"><i class="fa-solid fa-user"></i></div>
+      <span style="font-size:0.8rem; font-weight:600; color: var(--text-primary);">You</span>
+    </div>
+  </header>
+
+  <div style="padding: 20px 20px 100px; max-width: 900px; margin: 0 auto;">
+    
+    <!-- Controls Panel -->
+    <div class="glass-panel gs-reveal" style="margin-bottom: 25px; padding: 20px;">
+        <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+            <input type="text" id="lb-search" class="glass-input" placeholder="Search by name or major..." style="flex:1;">
+            <select id="lb-sort" class="glass-input" onchange="loadLeaderboardData()" style="width: 150px; cursor:pointer;">
+                <option value="ei">EI Score</option>
+                <option value="projects">Projects</option>
+                <option value="social">Social Score</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Leaderboard List -->
+    <div class="glass-panel gs-reveal">
+        <div class="lb-header-row" style="display: grid; grid-template-columns: 0.5fr 2fr 1fr 1fr; font-weight: 700; color: var(--text-secondary); padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.1);">
+            <span>Rank</span>
+            <span>Student</span>
+            <span>Major</span>
+            <span id="lb-sort-title">EI Score</span>
+        </div>
+        <div id="leaderboard-list">
+            <!-- List items injected by JS -->
+        </div>
+        <p id="lb-status" style="text-align:center; margin-top:20px; font-size:0.9rem; color:var(--text-secondary);">Loading...</p>
+    </div>
+
+  </div>
+
+  <!-- Note: We need a new style for the leaderboard rows -->
+  <style>
+    .lb-row {
+        display: grid; grid-template-columns: 0.5fr 2fr 1fr 1fr;
+        align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.05);
+        transition: background 0.2s; cursor: pointer;
+        opacity: 0;
+    }
+    .lb-row:hover { background: rgba(255,255,255,0.4); border-radius: 10px; }
+    .lb-rank { font-weight: 800; font-family: var(--font-serif); font-size: 1.1rem; }
+    .lb-user-info { display: flex; align-items: center; gap: 15px; }
+    .lb-avatar { width: 40px; height: 40px; border-radius: 50%; background: #ccc; display: grid; place-items: center; color: white; font-weight: 600; font-size: 0.9rem; }
+    .lb-score { font-weight: 800; color: var(--text-primary); }
+
+    .lb-row.rank-1 .lb-rank { color: gold; font-size: 1.5rem; }
+    .lb-row.rank-2 .lb-rank { color: silver; }
+    .lb-row.rank-3 .lb-rank { color: #cd7f32; }
+  </style>
+
+  <script src="js/router.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/leaderboard.js"></script>
+</body>
+</html>

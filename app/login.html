@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - UniVibe</title>
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/components.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  
+  <style>
+    .login-wrapper {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+    .login-card {
+        width: 100%; max-width: 420px;
+        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(40px);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        border-radius: 40px; padding: 40px;
+        box-shadow: 0 30px 60px -10px rgba(45, 59, 42, 0.15);
+    }
+    .login-header { text-align: center; margin-bottom: 30px; }
+    .login-header h1 { font-family: var(--font-serif); font-size: 2.5rem; color: var(--text-primary); margin-bottom: 5px; }
+  </style>
+</head>
+<body>
+  <div class="app-bg"><div class="blob b1"></div><div class="blob b2"></div></div>
+
+  <div class="login-wrapper">
+      <div class="login-card">
+        <div class="login-header">
+            <h1>UniRank</h1>
+            <p style="color: var(--text-secondary);">Your campus identity starts here.</p>
+        </div>
+        
+        <form onsubmit="login(event)">
+          <div class="input-group">
+            <label>Full Name</label>
+            <input type="text" id="name" class="glass-input" placeholder="e.g. Arjun Mehta" required>
+          </div>
+          
+          <div class="input-group">
+            <label>I identify as</label>
+            <div style="position: relative;">
+                <select id="gender" class="glass-input" style="appearance: none; cursor: pointer;">
+                    <option value="" disabled selected>Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+                <i class="fa-solid fa-chevron-down" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--text-secondary);"></i>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label>University</label>
+            <input type="text" id="uni" class="glass-input" placeholder="e.g. IIT Bombay">
+          </div>
+          <div class="input-group">
+            <label>Branch & Year</label>
+            <input type="text" id="major" class="glass-input" placeholder="e.g. CS • 3rd Year">
+          </div>
+          
+          <button type="submit" class="btn-primary">Enter Campus <i class="fa-solid fa-arrow-right"></i></button>
+        </form>
+      </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script>
+    gsap.from(".login-card", {y: 60, opacity: 0, duration: 1.2, ease: "power4.out"});
+  </script>
+</body>
+</html>

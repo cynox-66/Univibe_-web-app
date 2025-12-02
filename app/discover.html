@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Discover - UniVibe</title>
+
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
+  </head>
+  <body>
+    <div class="app-bg">
+      <div class="blob b1"></div>
+      <div class="blob b2"></div>
+    </div>
+
+    <header class="page-header">
+      <div class="header-title">
+        <h2>Discover</h2>
+        <span>Connect by Skills</span>
+      </div>
+      <div class="user-pill" onclick="window.location.href='profile.html'">
+        <div class="avatar-xs"><i class="fa-solid fa-user"></i></div>
+        <span
+          style="
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-primary);
+          "
+          >You</span
+        >
+      </div>
+    </header>
+
+    <div
+      style="
+        padding: 20px;
+        overflow: hidden;
+        height: calc(100vh - 80px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      "
+    >
+      <div class="swipe-deck" id="card-stack">
+        <div class="empty-deck">
+          <div
+            style="
+              background: rgba(255, 255, 255, 0.5);
+              padding: 40px;
+              border-radius: 50%;
+              margin-bottom: 20px;
+            "
+          >
+            <i
+              class="fa-solid fa-check"
+              style="font-size: 3rem; color: var(--accent-color)"
+            ></i>
+          </div>
+          <h3>You're all caught up!</h3>
+          <p style="color: var(--text-secondary); margin-bottom: 20px">
+            Check back later for more students.
+          </p>
+          <button
+            class="btn-primary"
+            style="width: auto; padding: 10px 30px"
+            onclick="resetSwipes()"
+          >
+            Start Over
+          </button>
+        </div>
+      </div>
+
+      <div class="swipe-actions">
+        <button class="action-btn-lg btn-pass" onclick="triggerSwipe('left')">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <button class="action-btn-lg btn-super" onclick="triggerSwipe('super')">
+          <i class="fa-solid fa-star"></i>
+        </button>
+        <button class="action-btn-lg btn-like" onclick="triggerSwipe('right')">
+          <i class="fa-solid fa-heart"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="match-overlay" id="match-modal">
+      <div
+        id="confetti-container"
+        style="
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          overflow: hidden;
+        "
+      ></div>
+
+      <h1 class="match-title">It's a Match!</h1>
+      <p class="match-text">
+        You and <span id="match-name-target">User</span> have similar goals.
+      </p>
+
+      <div class="match-avatars">
+        <div class="match-av left" id="my-av">Me</div>
+        <div class="match-av right" id="their-av">S</div>
+        <div
+          style="
+            position: absolute;
+            z-index: 3;
+            background: #fff;
+            border-radius: 50%;
+            padding: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+          "
+        >
+          <i
+            class="fa-solid fa-heart"
+            style="font-size: 1.5rem; color: #e0245e"
+          ></i>
+        </div>
+      </div>
+
+      <div
+        id="modal-btns"
+        style="
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+          width: 80%;
+          max-width: 300px;
+        "
+      >
+        <button
+          class="btn-primary"
+          style="background: #fff; color: var(--text-primary)"
+          onclick="goToChat()"
+        >
+          <i class="fa-solid fa-comment-dots"></i> Send a Message
+        </button>
+
+        <button
+          style="
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            font-size: 0.9rem;
+          "
+          onclick="closeMatch()"
+        >
+          Keep Swiping
+        </button>
+      </div>
+    </div>
+
+    <script src="js/router.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/discover.js"></script>
+  </body>
+</html>

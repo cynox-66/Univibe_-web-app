@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings - UniVibe</title>
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  </head>
+  <body>
+    <div class="app-bg">
+      <div class="blob b1"></div>
+      <div class="blob b2"></div>
+    </div>
+
+    <header class="page-header">
+      <div class="header-title">
+        <h2>Settings</h2>
+      </div>
+      <div class="user-pill" onclick="window.location.href='profile.html'">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span style="font-size: 0.8rem; font-weight: 600; margin-left: 5px"
+          >Back</span
+        >
+      </div>
+    </header>
+
+    <div style="padding: 20px; max-width: 600px; margin: 0 auto 100px">
+      <div class="settings-card gs-reveal">
+        <div style="display: flex; align-items: center; margin-bottom: 20px">
+          <div
+            class="avatar-xs"
+            id="set-avatar"
+            style="
+              width: 60px;
+              height: 60px;
+              font-size: 1.5rem;
+              margin-right: 15px;
+            "
+          >
+            U
+          </div>
+          <div>
+            <h2 id="set-name" style="margin: 0; font-size: 1.4rem">User</h2>
+            <p id="set-uni" style="margin: 0; color: var(--text-secondary)">
+              University
+            </p>
+          </div>
+        </div>
+        <button
+          class="btn-primary"
+          style="font-size: 0.9rem; padding: 10px"
+          onclick="window.location.href='profile.html'"
+        >
+          Edit Profile
+        </button>
+      </div>
+
+      <div class="settings-card gs-reveal" style="margin-top: 20px">
+        <h4
+          style="
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+          "
+        >
+          Preferences
+        </h4>
+
+        <div class="setting-row">
+          <div style="display: flex; align-items: center">
+            <div class="setting-icon" style="background: #556b4f">
+              <i class="fa-solid fa-moon"></i>
+            </div>
+            <div class="setting-info">
+              <h4>Dark Sage Mode</h4>
+              <p>Easy on the eyes</p>
+            </div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="theme-toggle" onchange="toggleTheme()" />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-row">
+          <div style="display: flex; align-items: center">
+            <div class="setting-icon" style="background: #8ba37e">
+              <i class="fa-solid fa-bell"></i>
+            </div>
+            <div class="setting-info">
+              <h4>Notifications</h4>
+              <p>Matches & Messages</p>
+            </div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="settings-card gs-reveal" style="margin-top: 20px">
+        <h4
+          style="
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+          "
+        >
+          Data
+        </h4>
+
+        <div class="setting-row">
+          <div style="display: flex; align-items: center">
+            <div class="setting-icon" style="background: #d9534f">
+              <i class="fa-solid fa-trash"></i>
+            </div>
+            <div class="setting-info">
+              <h4>Reset Data</h4>
+              <p>Clear matches & swipes</p>
+            </div>
+          </div>
+          <button
+            class="action-btn"
+            style="color: #d9534f"
+            onclick="resetData()"
+          >
+            Reset
+          </button>
+        </div>
+      </div>
+
+      <div class="gs-reveal" style="margin-top: 30px">
+        <button class="btn-primary btn-exit" onclick="logout()">
+          <i class="fa-solid fa-power-off"></i> Log Out & Return Home
+        </button>
+        <p
+          style="
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 15px;
+          "
+        >
+          UniRank v1.0 • Hackathon Build
+        </p>
+      </div>
+    </div>
+
+    <script src="js/router.js"></script>
+    <script src="js/ui.js"></script>
+    <script>
+      // Init Settings Data
+      const user = JSON.parse(localStorage.getItem("uni_user"));
+      if (user) {
+        document.getElementById("set-name").innerText = user.name;
+        document.getElementById("set-uni").innerText = user.uni;
+        document.getElementById("set-avatar").innerText = user.name[0];
+      }
+
+      // Toggle Theme
+      function toggleTheme() {
+        const isDark = document.body.classList.toggle("dark-mode");
+        localStorage.setItem("uni_theme", isDark ? "dark" : "light");
+      }
+
+      // Reset Data Logic
+      function resetData() {
+        if (confirm("Reset all swipes and matches? This cannot be undone.")) {
+          localStorage.removeItem("uni_swipes");
+          localStorage.removeItem("uni_matches");
+          localStorage.removeItem("uni_chats");
+          alert("Data reset.");
+          location.reload();
+        }
+      }
+
+      // Logout / Return to Landing
+      function logout() {
+        localStorage.removeItem("uni_user");
+        // Redirect to the main landing page (Root Directory)
+        window.location.href = "../index.html";
+      }
+
+      // Animation
+      gsap.from(".gs-reveal", {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power2.out",
+      });
+    </script>
+  </body>
+</html>

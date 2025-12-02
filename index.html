@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UniVibe - The Campus Companion</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&family=Playfair+Display:ital,wght@0,600;1,600&family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <nav class="floating-nav">
+      <div class="nav-content">
+        <div class="nav-logo">UniVibe</div>
+        <div class="nav-links">
+          <a href="#problem">Problem</a>
+          <a href="#ecosystem">Ecosystem</a>
+          <a href="#calculator">Calculator</a>
+        </div>
+        <button class="nav-cta" onclick="window.location.href='app/login.html'">Launch Web App</button>
+      </div>
+    </nav>
+
+    <div class="bg-container">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+      <div class="blob blob-4"></div>
+    </div>
+
+    <section class="hero-section">
+      <div class="title-container">
+        <h1 class="shimmer-text" id="uni">Uni</h1>
+        <h1 class="shimmer-text" id="vibe">Vibe</h1>
+      </div>
+
+      <div class="border-frame"></div>
+
+      <div class="glass-container">
+        <div class="glass-panel">
+          <div class="glass-content">
+            <h3>The Campus Companion</h3>
+            <h1>Rise With What Makes You Unique</h1>
+            <p>
+              UniVibe transforms your journey into a dynamic, authentic
+              identity. Every skill, project, and milestone boosts your rank,
+              showcasing your true potential—not just grades.
+            </p>
+            <div class="hero-btns">
+              <button class="glass-btn primary" onclick="window.location.href='app/login.html'">
+                <i class="fa-solid fa-rocket"></i> Launch Web App
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="scroll-wrapper" id="problem">
+      <div class="container-scroll" id="containerScroll">
+        <div class="header" id="header">
+          <h1 class="title">
+            Show Your Progress, <br />
+            <span class="big-title">Shape Your Path</span>
+          </h1>
+          <p class="subtitle">&nbsp;&nbsp;</p>
+        </div>
+
+        <div class="card" id="card">
+          <div class="card-inner">
+            <div class="recruiter-ui">
+              <div class="ui-header">
+                <div class="search-bar-container">
+                  <span class="search-icon">🔍</span>
+                  <input type="text" id="recruiterSearch" class="search-input" placeholder="Find top talent (e.g. 'Dev')..." />
+                </div>
+                <div class="filter-row">
+                  <div class="filter-chip active" onclick="filterCandidates('all')">All</div>
+                  <div class="filter-chip" onclick="filterCandidates('Dev')">Devs</div>
+                  <div class="filter-chip" onclick="filterCandidates('Design')">Designers</div>
+                  <div class="filter-chip" onclick="filterCandidates('Data')">Data</div>
+                </div>
+              </div>
+
+              <div class="candidate-list" id="candidateList">
+                <div class="candidate-row" data-role="Dev">
+                  <div class="c-avatar" style="background-color: #C591A3;">AJ</div>
+                  <div class="c-info"><h4>Arjun Mehta</h4><p>Full Stack Dev • 98% Attendance</p></div>
+                  <div class="c-score"><span>985</span><small>EI Score</small></div>
+                </div>
+                <div class="candidate-row" data-role="Design">
+                  <div class="c-avatar" style="background-color: #7C4871;">SL</div>
+                  <div class="c-info"><h4>Sarah Lee</h4><p>UI/UX Lead • Top Contributor</p></div>
+                  <div class="c-score"><span>940</span><small>EI Score</small></div>
+                </div>
+                <div class="candidate-row" data-role="Dev">
+                  <div class="c-avatar" style="background-color: #581C66;">DK</div>
+                  <div class="c-info"><h4>Dev Kumar</h4><p>Backend Dev • Hackathon Winner</p></div>
+                  <div class="c-score"><span>915</span><small>EI Score</small></div>
+                </div>
+                <div class="candidate-row" data-role="Data">
+                  <div class="c-avatar" style="background-color: #7b8f6e;">ZP</div>
+                  <div class="c-info"><h4>Zoya Patel</h4><p>Data Science • 5 Certifications</p></div>
+                  <div class="c-score"><span>890</span><small>EI Score</small></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="info-section">
+      <div class="grid-2-col">
+        <div class="pain-card glass-card">
+          <div class="icon-box">🎓</div>
+          <h2>More Than Numbers</h2>
+          <br>
+          <ul class="pain-list">
+            <li>College is about learning, growing, and evolving.</li>
+            <li>UniVibe captures all of it in one place.</li>
+            <li>Structured clarity for your career.</li>
+          </ul>
+        </div>
+        <div class="pain-card glass-card">
+          <div class="icon-box">💼</div>
+          <h2>Smarter Recruitment</h2>
+          <br>
+          <ul class="pain-list">
+            <li>Companies no longer want just marks.</li>
+            <li>They want capability and proof.</li>
+            <li>Skills, activity, and impact in one score.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="ecosystem" class="horizontal-section">
+      <div class="horizontal-wrapper">
+        <div class="horizontal-header">
+          <h2>The Ecosystem</h2>
+          <p>Pro Card for Career. Social Card for Life.</p>
+        </div>
+        
+        <div class="cards-track">
+          <div class="scroll-card pro">
+            <div class="card-icon">🚀</div>
+            <h3>Employability Score</h3>
+            <p>Your "Credit Score" for hiring. Calculated in real-time based on your actions.</p>
+            <div class="stat-badge">0-1000 Pts</div>
+          </div>
+          
+          <div class="scroll-card pro">
+            <div class="card-icon">📊</div>
+            <h3>Attendance Tracker</h3>
+            <p>Visual progress bars that prove your discipline and consistency to recruiters.</p>
+            <div class="stat-badge">Live Sync</div>
+          </div>
+          
+          <div class="scroll-card social">
+            <div class="card-icon">✨</div>
+            <h3>Social Score</h3>
+            <p>Quantify your soft skills, leadership, and campus engagement.</p>
+            <div class="stat-badge">Lvl 0-100</div>
+          </div>
+
+          <div class="scroll-card pro">
+            <div class="card-icon">🏅</div>
+            <h3>Skill Badges</h3>
+            <p>Verified achievements unlocked by completing projects and hackathons.</p>
+            <div class="stat-badge">Verified</div>
+          </div>
+
+          <div class="scroll-card social">
+            <div class="card-icon">🔥</div>
+            <h3>Activity Heatmap</h3>
+            <p>Track your daily consistency with a dynamic activity GitHub-style heatmap.</p>
+            <div class="stat-badge">Community</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="calculator" class="calculator-section">
+      <div class="calc-grid">
+        <div class="calc-content">
+          <h2 style="font-family: var(--font-serif); font-size: 3rem; margin-bottom: 10px;">The Secret Sauce</h2>
+          <h3 style="color: var(--text-secondary); margin-bottom: 20px;">Employability Index (EI)</h3>
+          
+          <div class="formula-display">
+            EI = (A × 0.4) + (P × 0.4) + (C × 0.2)
+          </div>
+
+          <div class="inputs-container">
+            <div class="input-group">
+              <label>Attendance (A) <span id="val-a">85%</span></label>
+              <input type="range" id="input-a" min="0" max="100" value="85" />
+            </div>
+            <div class="input-group">
+              <label>Projects (P) <span id="val-p">70/100</span></label>
+              <input type="range" id="input-p" min="0" max="100" value="70" />
+            </div>
+            <div class="input-group">
+              <label>Certifications (C) <span id="val-c">50/100</span></label>
+              <input type="range" id="input-c" min="0" max="100" value="50" />
+            </div>
+          </div>
+        </div>
+
+        <div class="calc-visual">
+          <div class="score-circle">
+            <svg viewBox="0 0 200 200">
+              <circle cx="100" cy="100" r="90" class="bg-ring" stroke-width="12"></circle>
+              <circle cx="100" cy="100" r="90" class="progress-ring" id="score-ring" stroke-width="12"></circle>
+            </svg>
+            <div class="score-text">
+              <span id="final-score">0</span>
+              <small style="letter-spacing: 2px; font-weight: 600;">EI SCORE</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="why-section">
+      <div class="why-content">
+        <h2>Why UniVibe Wins</h2>
+        <div class="why-grid">
+          <div class="why-item">
+            <i class="fa-solid fa-gamepad" style="color: var(--accent-color);"></i> 
+            Highly Gamified Experience
+          </div>
+          <div class="why-item">
+            <i class="fa-solid fa-code" style="color: var(--accent-color);"></i>
+            Technically Feasible (CRUD)
+          </div>
+          <div class="why-item">
+            <i class="fa-solid fa-briefcase" style="color: var(--accent-color);"></i>
+            Recruiter Subscription Model
+          </div>
+          <div class="why-item">
+            <i class="fa-solid fa-heart-pulse" style="color: var(--accent-color);"></i>
+            Solves Real Student Anxiety
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-content">
+        <h3>UniVibe</h3>
+        <p>Connecting Talent with Opportunity.</p>
+        <div class="footer-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Contact</a>
+        </div>
+        <p class="copyright">© 2025 UniVibe Ecosystem.</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

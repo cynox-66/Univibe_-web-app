@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Analytics - UniVibe</title>
+  
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+  <div class="app-bg"><div class="blob b1"></div><div class="blob b2"></div></div>
+  
+  <header class="page-header">
+    <div class="header-title">
+        <h2>Analytics</h2>
+    </div>
+    <div class="user-pill" onclick="window.location.href='profile.html'">
+      <div class="avatar-xs"><i class="fa-solid fa-user"></i></div>
+      <span style="font-size:0.8rem; font-weight:600; color: var(--text-primary);">You</span>
+    </div>
+  </header>
+
+  <div style="padding: 20px 20px 100px; max-width: 800px; margin: 0 auto;">
+    
+    <div class="kpi-grid">
+        <div class="kpi-card gs-fade">
+            <div class="kpi-value" id="kpi-consistency">0%</div>
+            <div class="kpi-label">Consistency</div>
+        </div>
+        <div class="kpi-card gs-fade">
+            <div class="kpi-value" id="kpi-streak">0</div>
+            <div class="kpi-label">Day Streak</div>
+        </div>
+        <div class="kpi-card gs-fade">
+            <div class="kpi-value" id="kpi-commits">0</div>
+            <div class="kpi-label">Commits</div>
+        </div>
+    </div>
+
+    <div class="glass-panel gs-fade" style="margin-bottom: 25px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <h4 class="section-title"><i class="fa-regular fa-calendar-check"></i> Attendance</h4>
+            <span style="font-size: 0.8rem; background: #fff; padding: 4px 10px; border-radius: 10px;">Safe Skips: <strong id="safe-skips">0</strong></span>
+        </div>
+        
+        <div class="att-wrapper">
+            <div class="att-circle-container">
+                <svg class="att-svg" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="40" class="att-bg-ring" fill="none" stroke-width="8"></circle>
+                    <circle cx="50" cy="50" r="40" class="att-progress-ring" id="att-ring" fill="none" stroke-width="8" stroke-dasharray="251" stroke-dashoffset="251"></circle>
+                </svg>
+                <div style="position:absolute; inset:0; display:grid; place-items:center; font-weight:800; font-size:1.5rem;" id="att-text">0%</div>
+            </div>
+
+            <div style="flex:1;">
+                <div style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:5px;">This Week Activity</div>
+                <div class="week-graph" id="week-graph">
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="glass-panel gs-fade" style="margin-bottom: 25px;">
+        <div class="heatmap-header">
+            <h4 class="section-title" style="margin:0;"><i class="fa-solid fa-fire"></i> Activity</h4>
+            <div class="heatmap-toggles">
+                <button class="hm-toggle active" onclick="switchHeatmap('uni')">Uni</button>
+                <button class="hm-toggle" onclick="switchHeatmap('git')">Git</button>
+                <button class="hm-toggle" onclick="switchHeatmap('leet')">Leet</button>
+            </div>
+        </div>
+        
+        <div class="heatmap-container">
+            <div class="heatmap-grid" id="heatmap-grid">
+                </div>
+        </div>
+        
+        <div style="display:flex; justify-content:flex-end; align-items:center; gap:5px; margin-top:10px; font-size:0.7rem; color:var(--text-secondary);">
+            <span>Less</span>
+            <div class="hm-cell hm-l0"></div>
+            <div class="hm-cell hm-l1"></div>
+            <div class="hm-cell hm-l2"></div>
+            <div class="hm-cell hm-l3"></div>
+            <div class="hm-cell hm-l4"></div>
+            <span>More</span>
+        </div>
+    </div>
+
+    <div class="glass-panel gs-fade">
+        <h4 class="section-title"><i class="fa-solid fa-certificate"></i> Verify Certificate</h4>
+        <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:15px;">Upload your PDF. AI will verify authenticity in real-time.</p>
+        
+        <div class="upload-zone" onclick="document.getElementById('cert-input').click()">
+            <input type="file" id="cert-input" hidden>
+            <i class="fa-solid fa-cloud-arrow-up" style="font-size:2rem; color:var(--accent-color); margin-bottom:10px;"></i>
+            <div>Tap to Upload</div>
+        </div>
+        
+        <div id="upload-status" class="upload-status"></div>
+
+        <div style="margin-top: 20px;">
+            <h5 style="margin-bottom:10px;">Verified Certificates</h5>
+            <div id="cert-list" class="cert-list">
+                </div>
+        </div>
+    </div>
+
+  </div>
+
+  <script src="js/router.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/analytics.js"></script>
+</body>
+</html>

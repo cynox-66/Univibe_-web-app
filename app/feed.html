@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feed - UniVibe</title>
+  
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+  <div class="app-bg"><div class="blob b1"></div><div class="blob b2"></div></div>
+  
+  <header class="page-header">
+    <div class="header-title">
+        <!-- <div class="live-badge">
+            <span class="live-dot"></span> Live Updates
+        </div> -->
+        <h2>Campus Feed</h2>
+    </div>
+    
+    <div class="user-pill" onclick="window.location.href='profile.html'">
+      <div class="avatar-xs"><i class="fa-solid fa-user"></i></div>
+      <span style="font-size:0.85rem; font-weight:600; color: var(--text-primary);">You</span>
+    </div>
+  </header>
+
+  <div id="feed-container" class="feed-stream" style="padding: 30px 20px 100px;">
+    </div>
+
+  <div class="feed-loader" id="feed-loader">
+    <i class="fa-solid fa-circle-notch fa-spin" style="color: var(--text-secondary);"></i>
+  </div>
+
+  <script src="js/router.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/feed.js"></script>
+</body>
+</html>

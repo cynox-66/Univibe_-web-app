@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat - UniVibe</title>
+  
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+  <div class="app-bg"><div class="blob b1"></div><div class="blob b2"></div></div>
+  
+  <header class="page-header">
+    <div class="header-title">
+        <h2>Messages</h2>
+    </div>
+    <div class="user-pill" onclick="window.location.href='profile.html'">
+      <div class="avatar-xs"><i class="fa-solid fa-user"></i></div>
+      <span style="font-size:0.8rem; font-weight:600; color: var(--text-primary);">You</span>
+    </div>
+  </header>
+
+  <!-- CHAT LAYOUT -->
+  <div style="padding: 20px; max-width: 1200px; margin: 0 auto;">
+      <div class="chat-layout" id="chat-layout">
+          
+          <!-- SIDEBAR: Matches List -->
+          <div class="chat-sidebar">
+              <div class="match-search">
+                  <div class="input-group" style="margin:0;">
+                      <input type="text" id="search-matches" class="glass-input" placeholder="Search matches..." style="padding:12px 15px; font-size:0.9rem;">
+                  </div>
+              </div>
+              <div class="match-list" id="match-list">
+                  <!-- Injected via JS -->
+              </div>
+          </div>
+
+          <!-- MAIN: Conversation -->
+          <div class="chat-main">
+              
+              <!-- Empty State -->
+              <div id="no-chat" class="no-chat-selected">
+                  <div style="width:80px; height:80px; background:rgba(255,255,255,0.5); border-radius:50%; display:grid; place-items:center; margin-bottom:15px;">
+                      <i class="fa-regular fa-paper-plane" style="font-size:2rem; color:var(--text-secondary);"></i>
+                  </div>
+                  <h3>Select a conversation</h3>
+                  <p>Start connecting with your campus network.</p>
+              </div>
+
+              <!-- Active Chat View -->
+              <div id="active-chat-view" class="hidden" style="display:flex; flex-direction:column; height:100%;">
+                  
+                  <div class="chat-view-header">
+                      <button class="back-btn action-btn" onclick="closeChatMobile()"><i class="fa-solid fa-chevron-left"></i></button>
+                      <div class="m-avatar" id="header-avatar" style="width:40px; height:40px; font-size:1rem;">U</div>
+                      <div>
+                          <h4 style="margin:0; font-size:1rem;" id="header-name">User</h4>
+                          <span style="font-size:0.75rem; color:green;">• Online</span>
+                      </div>
+                  </div>
+
+                  <div class="messages-area" id="msg-container">
+                      <!-- Messages Injected Here -->
+                  </div>
+
+                  <!-- Typing Indicator -->
+                  <div id="typing-indicator" style="padding: 0 20px 10px; display:none;">
+                      <div class="typing-bubble">
+                          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+                      </div>
+                  </div>
+
+                  <div class="chat-input-wrapper">
+                      <input type="text" id="msg-input" class="glass-input" placeholder="Type a message..." style="border-radius:25px;">
+                      <button class="btn-primary" style="width:50px; height:50px; border-radius:50%; padding:0;" onclick="sendMessage()">
+                          <i class="fa-solid fa-paper-plane"></i>
+                      </button>
+                  </div>
+
+              </div>
+
+          </div>
+      </div>
+  </div>
+
+  <script src="js/router.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/chat.js"></script>
+</body>
+</html>

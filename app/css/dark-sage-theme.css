@@ -1,0 +1,18 @@
+body.dark-mode {
+  --bg-color: #2d3b2a;
+  --text-primary: #f9f3e5;
+  --text-secondary: #c1d0b5;
+  --accent-color: #8ba37e;
+  --glass-bg: rgba(30, 40, 30, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --blob-1: #1a2319;
+  --blob-2: #3e4f3a;
+  --shadow-soft: 0 15px 35px -5px rgba(0, 0, 0, 0.3);
+}
+body.dark-mode .bottom-nav {
+  background: rgba(45, 59, 42, 0.8);
+}
+body.dark-mode .glass-input {
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+}
