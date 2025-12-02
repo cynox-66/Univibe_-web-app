@@ -26,13 +26,13 @@
     <div id="top-nav-container" class="top-nav"></div>
 
     <div style="display:flex; align-items:center;">
-        <!-- Theme Toggle Injected by ui.js -->
-        <div id="theme-toggle-container"></div>
-
         <div class="user-pill" onclick="window.location.href='profile.html'">
             <div class="avatar-xs"><i class="fa-solid fa-user"></i></div>
             <span style="font-size:0.85rem; font-weight:600; color: var(--text-primary);">You</span>
         </div>
+
+        <!-- Theme Toggle Injected by ui.js -->
+        <div id="theme-toggle-container" style="margin-left: 10px;"></div>
     </div>
   </header>
 
@@ -41,7 +41,7 @@
 
   <div class="main-layout">
     <!-- LEFT SIDE PANEL -->
-    <aside class="side-panel">
+    <aside class="side-panel" id="quick-panel">
         <!-- Quick Stats Card -->
         <div class="panel-card">
             <div class="mini-ei-container">

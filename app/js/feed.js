@@ -15,17 +15,29 @@ let currentUser = null;
 
 // --- 1. INITIALIZATION & SIDE PANEL ---
 
-document.addEventListener("DOMContentLoaded", async () => {
-    // Load User Data for Side Panel
-    currentUser = await getUserProfile();
-    if (currentUser) {
-        initSidePanel(currentUser);
-    }
+// --- 1. INITIALIZATION & SIDE PANEL ---
 
-    // Load Feed
-    loadMorePosts();
-    if(loader) observer.observe(loader);
-});
+async function initFeed() {
+    try {
+        // Wait for auth and profile
+        currentUser = await getUserProfile();
+        
+        if (currentUser) {
+            initSidePanel(currentUser);
+        } else {
+            console.log("Guest view or profile not loaded.");
+        }
+
+        // Load Feed Content
+        loadMorePosts();
+        if(loader) observer.observe(loader);
+
+    } catch (error) {
+        console.error("Error initializing feed:", error);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", initFeed);
 
 function initSidePanel(user) {
     // 1. EI Circle
@@ -67,14 +79,26 @@ function animateCounter(el, target, suffix) {
 window.logAttendance = async function() {
     if(!currentUser) return;
     
-    // Optimistic UI Update
     const btn = document.querySelector('.panel-btn i.fa-calendar-check');
+    
+    // 1. UI Animation
     gsap.to(btn, { rotation: 360, duration: 0.5 });
     
-    alert(`Attendance Logged for ${new Date().toLocaleDateString()}! \nConsistency +1%`);
+    // 2. Calculate New Values
+    const currentAtt = currentUser.attendance || 0;
+    const newAtt = Math.min(100, currentAtt + 1); // Cap at 100
     
-    // In a real app, we'd update Firestore here
-    // await updateUserProfile({ attendance: (currentUser.attendance || 0) + 1 });
+    // 3. Update Firestore
+    const success = await updateUserProfile({ attendance: newAtt });
+    
+    if (success) {
+        // 4. Update Local State & UI
+        currentUser.attendance = newAtt;
+        initSidePanel(currentUser); // Refresh panel stats
+        alert(`Attendance Logged! \nNew Attendance: ${newAtt}%`);
+    } else {
+        alert("Failed to log attendance. Please try again.");
+    }
 };
 
 window.uploadCert = function() {

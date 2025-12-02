@@ -24,7 +24,6 @@ body {
   color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
-  padding-bottom: 80px;
 }
 
 /* Background Blobs (Shared) */

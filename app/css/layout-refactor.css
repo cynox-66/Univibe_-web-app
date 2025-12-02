@@ -14,15 +14,15 @@
 }
 
 /* --- SIDE PANEL (Quick Actions) --- */
-.side-panel {
+.side-panel, .quick-panel {
   width: 260px;
   position: sticky;
-  top: 100px; /* Below header */
+  top: 120px; /* Increased to clear header */
   display: flex;
   flex-direction: column;
   gap: 20px;
   flex-shrink: 0;
-  max-height: calc(100vh - 120px);
+  max-height: calc(100vh - 140px);
   overflow-y: auto;
   scrollbar-width: none; /* Hide scrollbar */
 }
